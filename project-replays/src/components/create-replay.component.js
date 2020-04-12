@@ -3,7 +3,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateExercises extends Component {
+export default class CreateReplays extends Component {
     constructor(props){
         super(props);
 
@@ -18,11 +18,13 @@ export default class CreateExercises extends Component {
 
 
         this.state = {
-            username: '',
-            description: '',
-            duration: 0,
-            date: new Date(),
-            users: []
+            game: '',
+            link: '',
+            player1: '',
+            player2: '',
+            character1: [],
+            character2: [],
+            winner: ''
         }
     }
 
