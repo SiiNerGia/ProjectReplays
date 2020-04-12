@@ -6,18 +6,23 @@ router.route('/').get((req,res) => {
 });
 
 router.route('/add').post((req,res) => {
-    const username = req.body.username;
-    const description = req.body.description;
-    const duration = Number(req.body.duration);
-    const date = Date.parse(req.body.date);
+    const game = req.body.game;
+    const link = req.body.link;
+    const player1 = req.body.player1;
+    const player2 = req.body.player2;
+    const character1 = req.body.character1;
+    const character2 = req.body.character2;
+    const winner = req.body.winner;
 
 
     const newReplay = new Replay({
-        //TODO
-        username,
-        description,
-        duration,
-        date,
+        game,
+        link,
+        player1,
+        player2,
+        character1,
+        character2,
+        winner
     });
 
 
