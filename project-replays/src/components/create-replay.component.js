@@ -1,16 +1,16 @@
 import React, { Component} from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-
 export default class CreateReplays extends Component {
     constructor(props){
         super(props);
 
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeDuration = this.onChangeDuration.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChangeGame = this.onChangeGame.bind(this);
+        this.onChangeLink = this.onChangeLink.bind(this);
+        this.onChangePlayer1 = this.onChangePlayer1.bind(this);
+        this.onChangePlayer2 = this.onChangePlayer2.bind(this);
+        this.onChangeCharacter1 = this.onChangeCharacter1.bind(this);
+        this.onChangeCharacter2 = this.onChangeCharacter2.bind(this);
+        this.onChangeWinner = this.onChangeWinner.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
 
@@ -18,48 +18,82 @@ export default class CreateReplays extends Component {
 
 
         this.state = {
-            game: '',
+            games: [],
+            game:'',
             link: '',
             player1: '',
             player2: '',
-            character1: [],
-            character2: [],
+            characters1: [],
+            characters2: [],
+            character1:'',
+            character2:'',
             winner: ''
         }
     }
 
 
-    componentDidMount(){
-        axios.get('http://localhost:5000/users/').then(response => {
-            if(response.data.length > 0){
-                this.setState({
-                    users: response.data.map(user => user.username),
-                    username: response.data[0].username
-                })
-            }
-        })
+    // componentDidMount(){
+    //     axios.get('http://localhost:5000/users/').then(response => {
+    //         if(response.data.length > 0){
+    //             this.setState({
+    //                 users: response.data.map(user => user.username),
+    //                 username: response.data[0].username
+    //             })
+    //         }
+    //     })
        
+    // }
+
+    componentDidMount(){
+        this.setState({
+            games: ['Sfv'],
+            characters1: ['Ryu'],
+            characters2: ['Ken'],
+            game:'Sfv',
+            character1: 'Ryu',
+            character2:'Ken'
+        })
     }
 
 
-    onChangeUsername(e){
+    onChangeGame(e){
         this.setState({
-            username: e.target.value 
+            game: e.target.value 
         })
     }
-    onChangeDescription(e){
+    onChangeLink(e){
         this.setState({
-            description: e.target.value 
+            link: e.target.value 
         })
     }
-    onChangeDuration(e){
+    onChangePlayer1(e){
         this.setState({
-            duration: e.target.value 
+            player1: e.target.value 
         })
     }
-    onChangeDate(date){
+    onChangePlayer2(e){
         this.setState({
-            date: date
+            player2: e.target.value
+        })
+    }
+
+    onChangeCharacter1(e){
+        this.setState({
+            character1: e.target.value
+        })
+    }
+
+
+    onChangeCharacter2(e){
+        this.setState({
+            character2: e.target.value
+        })
+    }
+
+
+    onChangeWinner(e){
+        this.setState({
+            winner: e.target.value
         })
     }
 
@@ -67,16 +101,19 @@ export default class CreateReplays extends Component {
     onSubmit(e){
         e.preventDefault();
 
-        const exercise ={
-            username: this.state.username,
-            description: this.state.description,
-            duration: this.state.duration,
-            date: this.state.date,
+        const replay ={
+            game: this.state.game,
+            link: this.state.link,
+            player1: this.state.player1,
+            player2: this.state.player2,
+            character1: this.state.character1,
+            character2 :this.state.character2,
+            winner: this.state.winner
         }
 
-        console.log(exercise);
+        console.log(JSON.stringify(replay));
 
-        axios.post('http://localhost:5000/exercises/add', exercise).then(res => console.log(res.data));
+       axios.post('http://localhost:5000/replays/add', replay).then(res => console.log(res.data));
 
 
         window.location = '/';
@@ -85,55 +122,98 @@ export default class CreateReplays extends Component {
     render(){
         return(
             <div>
-            <h3>Create New Exercise Log</h3>
+            <h3>Create New Replay</h3>
             <form onSubmit={this.onSubmit}>
               <div className="form-group"> 
-                <label>Username: </label>
+                <label>Game: </label>
                 <select ref="userInput"
                     required
-                    className="form-control"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}>
+                    className= "from-control"
+                    value={this.state.game}
+                    onChange={this.onChangeGame}>
                     {
-                      this.state.users.map(function(user) {
-                        return <option 
-                          key={user}
-                          value={user}>{user}
-                          </option>;
-                      })
+                        this.state.games.map(function(game){
+                            return <option
+                            key = {game}
+                            value={game}>{game}
+                            </option>;
+                        })
                     }
-                </select>
+                    </select>
               </div>
               <div className="form-group"> 
-                <label>Description: </label>
+                <label>Link: </label>
                 <input  type="text"
                     required
                     className="form-control"
-                    value={this.state.description}
-                    onChange={this.onChangeDescription}
+                    value={this.state.link}
+                    onChange={this.onChangeLink}
                     />
               </div>
-              <div className="form-group">
-                <label>Duration (in minutes): </label>
-                <input 
-                    type="text" 
+              <div className="form-group"> 
+                <label>Player 1: </label>
+                <input  type="text"
+                    required
                     className="form-control"
-                    value={this.state.duration}
-                    onChange={this.onChangeDuration}
+                    value={this.state.player1}
+                    onChange={this.onChangePlayer1}
+                    />
+              </div>
+              <div className="form-group"> 
+                <label>Player 2: </label>
+                <input  type="text"
+                    required
+                    className="form-control"
+                    value={this.state.player2}
+                    onChange={this.onChangePlayer2}
                     />
               </div>
               <div className="form-group">
-                <label>Date: </label>
-                <div>
-                  <DatePicker
-                    selected={this.state.date}
-                    onChange={this.onChangeDate}
-                  />
-                </div>
+                <label>Character 1: </label>
+                <select ref="userInput"
+                    required
+                    className= "from-control"
+                    value={this.state.game}
+                    onChange={this.onChangeCharacter1}>
+                    {
+                        this.state.characters1.map(function(character1){
+                            return <option
+                            key = {character1}
+                            value={character1}>{character1}
+                            </option>;
+                        })
+                    }
+                    </select>
+              </div>
+              <div className="form-group">
+                <label>Character 2: </label>
+                <select ref="userInput"
+                    required
+                    className= "from-control"
+                    value={this.state.game}
+                    onChange={this.onChangeCharacter2}>
+                    {
+                        this.state.characters2.map(function(character2){
+                            return <option
+                            key = {character2}
+                            value={character2}>{character2}
+                            </option>;
+                        })
+                    }
+                    </select>
+              </div>
+              <div className="form-group"> 
+                <label>Winner: </label>
+                <input  type="text"
+                    required
+                    className="form-control"
+                    value={this.state.winner}
+                    onChange={this.onChangeWinner}
+                    />
               </div>
       
               <div className="form-group">
-                <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+                <input type="submit" value="Create a new replay" className="btn btn-primary" />
               </div>
             </form>
           </div>

@@ -2,32 +2,36 @@
  import { Link } from 'react-router-dom';
  import axios from 'axios';
 
- const Exercise = props => (
+ const Replay = props => (
     <tr>
-      <td>{props.exercise.username}</td>
-      <td>{props.exercise.description}</td>
-      <td>{props.exercise.duration}</td>
-      <td>{props.exercise.date.substring(0,10)}</td>
+      <td>{props.exercise.game}</td>
+      <td>{props.exercise.player1}</td>
+      <td>{props.exercise.character1}</td>
+      <td>{props.exercise.player2}</td>
+      <td>{props.exercise.character2}</td>
       <td>
-        <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
-      </td>
+         <a href={props.exercise.link} target="_blank">Link</a>
+        </td>
+      
+      
     </tr>
   )
 
- export default class ExercisesList extends Component {
+ export default class ReplaysList extends Component {
      constructor(props){
          super(props);
 
-         this.deleteExercise = this.deleteExercise.bind(this);
+         this.deleteReplay = this.deleteReplay.bind(this);
+        // this.replayList = this.replayList.bind(this);
 
 
-         this.state = {exercises: []};
+         this.state = {replays: []};
      }
 
      componentDidMount(){
-         axios.get('http://localhost:5000/exercises/').then(response => {
+         axios.get('http://localhost:5000/replays/').then(response => {
              this.setState({
-                 exercises: response.data
+                 replays: response.data
              })
          }).catch((error) => {
              console.log(error);
@@ -35,39 +39,42 @@
      }
 
 
-     deleteExercise(id){
-         axios.delete('http://localhost:5000/exercises/'+id).then(res => console.log(res.data));
+     deleteReplay(id){
+         axios.delete('http://localhost:5000/replays/'+id).then(res => console.log(res.data));
 
          this.setState({
-             exercises: this.state.exercises.filter(el => el._id !== id)
+             replays: this.state.replays.filter(el => el._id !== id)
          })
      }
 
-     exerciseList() {
-        return this.state.exercises.map(currentexercise => {
-          return <Exercise exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id}/>;
+     replayList() {
+        return this.state.replays.map(currentreplay => {
+          return <Replay exercise={currentreplay} deleteReplay={this.deleteReplay} key={currentreplay._id}/>;
         })
       }
+
 
 
      render(){
          return(
             <div>
-                <h3>Logged Exercises</h3>
-                <table className="table">
+                <h3>Logged Replays</h3>
+                    <table className="table">
                 <thead className="thead-light">
                     <tr>
-                    <th>Username</th>
-                    <th>Description</th>
-                    <th>Duration</th>
-                    <th>Date</th>
-                    <th>Actions</th>
+                    <th>Game</th>
+                    <th>Player1</th>
+                    
+                    <th>Character 1</th>
+                    <th>Player2</th>
+                    <th>Character 2</th>
+                    <th>Link</th>
                     </tr>
                 </thead>
                 <tbody>
-                    { this.exerciseList() }
+                    { this.replayList() }
                 </tbody>
-                </table>
+                </table> 
             </div>
          )
      }
