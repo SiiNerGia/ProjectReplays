@@ -1,6 +1,18 @@
 import React, { Component} from 'react';
 import axios from 'axios';
+
+
+
+const streetFighterCharacters =['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+    'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'];
+
+const tekken7Characters = ['Heihachi','Kazuya','Lee','Law','Nina','Paul','Yoshimitsu','Bryan','Eddy','Hwoarang','Jin','King','Kuma','Xiaoyu','Panda','Steve','Asuka','Devil Jin','Feng',
+'Lili','Dragunov','Bob','Leo','Miguel','Lars','Alisa','Claudio','Katarina','Lucky Chloe','Shaheen','Josie','Gigas','Jack-7','Kazumi','Master Raven','Eliza','Anna','Lei','Julia',
+'Marduk','Armor King','Zafina','Ganryu','Leroy','Fahkumram','Akuma','Geese','Noctis','Negan']
+
 export default class CreateReplays extends Component {
+
+    
     constructor(props){
         super(props);
 
@@ -46,20 +58,38 @@ export default class CreateReplays extends Component {
 
     componentDidMount(){
         this.setState({
-            games: ['Sfv'],
-            characters1: ['Ryu'],
-            characters2: ['Ken'],
-            game:'Sfv',
-            character1: 'Ryu',
-            character2:'Ken'
+            games: ['Street Fighter V','Tekken 7'],
+           
+         characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+        'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
+           
+        characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+            'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
+        
+        game:'Sfv',
+        character1: 'Ryu',
+        character2:'Ken'
         })
     }
 
 
     onChangeGame(e){
+        if(e.target.value == 'Street Fighter V'){
+            this.setState({
+                characters1: streetFighterCharacters,
+                characters2: streetFighterCharacters,
+            })
+            
+        }else{
+            this.setState({
+                characters1: tekken7Characters,
+                characters2: tekken7Characters,
+            })
+        }
         this.setState({
-            game: e.target.value 
+            game: e.target.value
         })
+       
     }
     onChangeLink(e){
         this.setState({
@@ -173,7 +203,7 @@ export default class CreateReplays extends Component {
                 <select ref="userInput"
                     required
                     className= "from-control"
-                    value={this.state.game}
+                    value={this.state.character1}
                     onChange={this.onChangeCharacter1}>
                     {
                         this.state.characters1.map(function(character1){
@@ -190,7 +220,7 @@ export default class CreateReplays extends Component {
                 <select ref="userInput"
                     required
                     className= "from-control"
-                    value={this.state.game}
+                    value={this.state.character2}
                     onChange={this.onChangeCharacter2}>
                     {
                         this.state.characters2.map(function(character2){
