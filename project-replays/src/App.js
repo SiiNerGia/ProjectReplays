@@ -4,9 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/navbar.component";
 import ReplaysList from "./components/replays-list.component";
-import EditExercise from "./components/edit-exercise.component";
 import CreateReplay from "./components/create-replay.component";
-import CreateUser from "./components/create-user.component";
+import SearchReplay from "./components/search-replay.component";
 
 function App() {
   return (
@@ -17,9 +16,8 @@ function App() {
         
         <br/>
         <Route path="/" exact component={ReplaysList} />
-        <Route path="/edit/:id" exact component={EditExercise} />
         <Route path="/create" exact component={CreateReplay} />
-        <Route path="/user" exact component={CreateUser} />
+        <Route path="/search" exact component={SearchReplay} />
       </div>
 
     </Router>

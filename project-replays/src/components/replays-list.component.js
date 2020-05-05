@@ -1,5 +1,5 @@
  import React, { Component} from 'react';
- import { Link } from 'react-router-dom';
+ //import { Link } from 'react-router-dom';
  import axios from 'axios';
 
  const Replay = props => (
@@ -10,7 +10,7 @@
       <td>{props.exercise.player2}</td>
       <td>{props.exercise.character2}</td>
       <td>
-         <a href={props.exercise.link} target="_blank">Link</a>
+         <a href={props.exercise.link} target="_blank" rel="noopener noreferrer">Link</a>
         </td>
       
       
@@ -21,11 +21,12 @@
      constructor(props){
          super(props);
 
-         this.deleteReplay = this.deleteReplay.bind(this);
-        // this.replayList = this.replayList.bind(this);
+        
 
 
-         this.state = {replays: []};
+         this.state = {
+             replays: []
+            };
      }
 
      componentDidMount(){
@@ -39,13 +40,6 @@
      }
 
 
-     deleteReplay(id){
-         axios.delete('http://localhost:5000/replays/'+id).then(res => console.log(res.data));
-
-         this.setState({
-             replays: this.state.replays.filter(el => el._id !== id)
-         })
-     }
 
      replayList() {
         return this.state.replays.map(currentreplay => {

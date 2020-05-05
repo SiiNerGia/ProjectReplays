@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import axios from 'axios';
+//let Replay = require('ProjectReplays/backend/models/Replay.model');
 
 
 
@@ -39,22 +40,12 @@ export default class CreateReplays extends Component {
             characters2: [],
             character1:'',
             character2:'',
-            winner: ''
+            winner: '',
+            replaysQuery: ''
         }
     }
 
 
-    // componentDidMount(){
-    //     axios.get('http://localhost:5000/users/').then(response => {
-    //         if(response.data.length > 0){
-    //             this.setState({
-    //                 users: response.data.map(user => user.username),
-    //                 username: response.data[0].username
-    //             })
-    //         }
-    //     })
-       
-    // }
 
     componentDidMount(){
         this.setState({
@@ -129,30 +120,35 @@ export default class CreateReplays extends Component {
 
 
     onSubmit(e){
-        e.preventDefault();
+        // e.preventDefault();
 
-        const replay ={
-            game: this.state.game,
-            link: this.state.link,
-            player1: this.state.player1,
-            player2: this.state.player2,
-            character1: this.state.character1,
-            character2 :this.state.character2,
-            winner: this.state.winner
-        }
+        // const replay ={
+        //     game: this.state.game,
+        //     link: this.state.link,
+        //     player1: this.state.player1,
+        //     player2: this.state.player2,
+        //     character1: this.state.character1,
+        //     character2 :this.state.character2,
+        //     winner: this.state.winner
+        // }
 
-        console.log(JSON.stringify(replay));
-
-       axios.post('http://localhost:5000/replays/add', replay).then(res => console.log(res.data));
+        // console.log(JSON.stringify(replay));
 
 
-        window.location = '/';
+
+
+        // this.setState({
+        //     replaysQuery: Replay.find({game: 'Tekken'})
+        // })
+       
+
+    
     }
 
     render(){
         return(
             <div>
-            <h3>Create New Replay</h3>
+            <h3>Search Replay</h3>
             <form onSubmit={this.onSubmit}>
               <div className="form-group"> 
                 <label>Game: </label>
@@ -233,18 +229,10 @@ export default class CreateReplays extends Component {
                     }
                     </select>
               </div>
-              <div className="form-group"> 
-                <label>Winner: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.winner}
-                    onChange={this.onChangeWinner}
-                    />
-              </div>
+              
       
               <div className="form-group">
-                <input type="submit" value="Create a new replay" className="btn btn-primary" />
+                <input type="submit" value="Search replay" className="btn btn-primary" />
               </div>
             </form>
           </div>
