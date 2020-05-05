@@ -69,7 +69,7 @@ export default class CreateReplays extends Component {
         game:'Street Fighter V',
         character1: 'Ryu',
         character2:'Ken',
-        winner: ''
+        winner: 'Player 1'
         })
     }
 
@@ -134,8 +134,6 @@ export default class CreateReplays extends Component {
             winnerField = this.state.player1
         }else if (this.state.winner === 'Player 2'){
             winnerField = this.state.player2;
-        }else{
-            winnerField = this.state.player1;
         }
 
         const replay ={
