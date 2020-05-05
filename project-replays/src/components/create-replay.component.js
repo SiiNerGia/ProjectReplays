@@ -10,6 +10,8 @@ const tekken7Characters = ['Heihachi','Kazuya','Lee','Law','Nina','Paul','Yoshim
 'Lili','Dragunov','Bob','Leo','Miguel','Lars','Alisa','Claudio','Katarina','Lucky Chloe','Shaheen','Josie','Gigas','Jack-7','Kazumi','Master Raven','Eliza','Anna','Lei','Julia',
 'Marduk','Armor King','Zafina','Ganryu','Leroy','Fahkumram','Akuma','Geese','Noctis','Negan']
 
+const players = ['Player 1', 'Player 2']
+
 export default class CreateReplays extends Component {
 
     
@@ -25,10 +27,6 @@ export default class CreateReplays extends Component {
         this.onChangeWinner = this.onChangeWinner.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
-
-
-
-
         this.state = {
             games: [],
             game:'',
@@ -39,10 +37,10 @@ export default class CreateReplays extends Component {
             characters2: [],
             character1:'',
             character2:'',
-            winner: ''
+            winner: '',
+            winners: [],
         }
     }
-
 
     // componentDidMount(){
     //     axios.get('http://localhost:5000/users/').then(response => {
@@ -58,20 +56,22 @@ export default class CreateReplays extends Component {
 
     componentDidMount(){
         this.setState({
-            games: ['Street Fighter V','Tekken 7'],
+            
+        games: ['Street Fighter V','Tekken 7'],
+        winners: [],
            
-         characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+        characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
         'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
            
         characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
             'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
         
-        game:'Sfv',
+        game:'Street Fighter V',
         character1: 'Ryu',
-        character2:'Ken'
+        character2:'Ken',
+        winner: ''
         })
     }
-
 
     onChangeGame(e){
         if(e.target.value === 'Street Fighter V'){
@@ -98,7 +98,7 @@ export default class CreateReplays extends Component {
     }
     onChangePlayer1(e){
         this.setState({
-            player1: e.target.value 
+            player1: e.target.value
         })
     }
     onChangePlayer2(e){
@@ -113,13 +113,11 @@ export default class CreateReplays extends Component {
         })
     }
 
-
     onChangeCharacter2(e){
         this.setState({
             character2: e.target.value
         })
     }
-
 
     onChangeWinner(e){
         this.setState({
@@ -127,9 +125,18 @@ export default class CreateReplays extends Component {
         })
     }
 
-
     onSubmit(e){
         e.preventDefault();
+
+        var winnerField = ''
+
+        if(this.state.winner === 'Player 1'){
+            winnerField = this.state.player1
+        }else if (this.state.winner === 'Player 2'){
+            winnerField = this.state.player2;
+        }else{
+            winnerField = this.state.player1;
+        }
 
         const replay ={
             game: this.state.game,
@@ -138,7 +145,7 @@ export default class CreateReplays extends Component {
             player2: this.state.player2,
             character1: this.state.character1,
             character2 :this.state.character2,
-            winner: this.state.winner
+            winner: winnerField
         }
 
         console.log(JSON.stringify(replay));
@@ -158,7 +165,7 @@ export default class CreateReplays extends Component {
                 <label>Game: </label>
                 <select ref="userInput"
                     required
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.game}
                     onChange={this.onChangeGame}>
                     {
@@ -203,7 +210,7 @@ export default class CreateReplays extends Component {
                 <label>Character 1: </label>
                 <select ref="userInput"
                     required
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.character1}
                     onChange={this.onChangeCharacter1}>
                     {
@@ -220,7 +227,7 @@ export default class CreateReplays extends Component {
                 <label>Character 2: </label>
                 <select ref="userInput"
                     required
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.character2}
                     onChange={this.onChangeCharacter2}>
                     {
@@ -233,15 +240,24 @@ export default class CreateReplays extends Component {
                     }
                     </select>
               </div>
-              <div className="form-group"> 
+
+            <div className="form-group">
                 <label>Winner: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.winner}
-                    onChange={this.onChangeWinner}
-                    />
-              </div>
+                <select ref="userInput"
+                  required
+                  className="form-control"
+                  value={this.state.winner}
+                  onChange={this.onChangeWinner}>
+                    {
+                        players.map(function(players){
+                            return<option
+                            key={players}
+                            value={players}>{players}
+                            </option>
+                        })
+                    }
+                  </select>
+            </div>
       
               <div className="form-group">
                 <input type="submit" value="Create a new replay" className="btn btn-primary" />

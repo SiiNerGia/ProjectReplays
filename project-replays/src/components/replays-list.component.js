@@ -9,6 +9,7 @@
       <td>{props.exercise.character1}</td>
       <td>{props.exercise.player2}</td>
       <td>{props.exercise.character2}</td>
+      <td>{props.exercise.winner}</td>
       <td>
          <a href={props.exercise.link} target="_blank" rel="noopener noreferrer">Link</a>
         </td>
@@ -62,6 +63,7 @@
                     <th>Character 1</th>
                     <th>Player2</th>
                     <th>Character 2</th>
+                    <th>Winner</th>
                     <th>Link</th>
                     </tr>
                 </thead>
