@@ -38,7 +38,6 @@ export default class CreateReplays extends Component {
             character1:'',
             character2:'',
             winner: '',
-            winners: [],
         }
     }
 
@@ -56,20 +55,15 @@ export default class CreateReplays extends Component {
 
     componentDidMount(){
         this.setState({
-            
-        games: ['Street Fighter V','Tekken 7'],
-        winners: [],
-           
-        characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
-        'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
-           
-        characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+            games: ['Select a game', 'Street Fighter V','Tekken 7'],
+            characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
             'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
-        
-        game:'Street Fighter V',
-        character1: 'Ryu',
-        character2:'Ken',
-        winner: 'Player 1'
+            characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+                'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
+            game:'Select a game',
+            character1: 'Ryu',
+            character2:'Ken',
+            winner: 'Player 1'
         })
     }
 
@@ -155,113 +149,140 @@ export default class CreateReplays extends Component {
     }
 
     render(){
-        return(
-            <div>
-            <h3>Create New Replay</h3>
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group"> 
-                <label>Game: </label>
-                <select ref="userInput"
-                    required
-                    className= "form-control"
-                    value={this.state.game}
-                    onChange={this.onChangeGame}>
-                    {
-                        this.state.games.map(function(game){
-                            return <option
-                            key = {game}
-                            value={game}>{game}
-                            </option>;
-                        })
-                    }
-                    </select>
+        if(this.state.game === 'Street Fighter V' || this.state.game === 'Tekken 7') {
+            return(
+                <div>
+                <h3>Create New Replay</h3>
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group"> 
+                    <label>Game: </label>
+                    <select ref="userInput"
+                        required
+                        className= "form-control"
+                        value={this.state.game}
+                        onChange={this.onChangeGame}>
+                        {
+                            this.state.games.map(function(game){
+                                return <option
+                                key = {game}
+                                value={game}>{game}
+                                </option>;
+                            })
+                        }
+                        </select>
+                  </div>
+                  <div className="form-group"> 
+                    <label>Youtube Link: </label>
+                    <input  type="url"
+                        pattern="https://www.youtube.com/.+"
+                        required
+                        className="form-control"
+                        value={this.state.link}
+                        onChange={this.onChangeLink}
+                        />
+                  </div>
+                  <div className="form-group"> 
+                    <label>Player 1: </label>
+                    <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.player1}
+                        onChange={this.onChangePlayer1}
+                        />
+                  </div>
+                  <div className="form-group"> 
+                    <label>Player 2: </label>
+                    <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.player2}
+                        onChange={this.onChangePlayer2}
+                        />
+                  </div>
+                  <div className="form-group">
+                    <label>Character 1: </label>
+                    <select ref="userInput"
+                        required
+                        className= "form-control"
+                        value={this.state.character1}
+                        onChange={this.onChangeCharacter1}>
+                        {
+                            this.state.characters1.map(function(character1){
+                                return <option
+                                key = {character1}
+                                value={character1}>{character1}
+                                </option>;
+                            })
+                        }
+                        </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Character 2: </label>
+                    <select ref="userInput"
+                        required
+                        className= "form-control"
+                        value={this.state.character2}
+                        onChange={this.onChangeCharacter2}>
+                        {
+                            this.state.characters2.map(function(character2){
+                                return <option
+                                key = {character2}
+                                value={character2}>{character2}
+                                </option>;
+                            })
+                        }
+                        </select>
+                  </div>
+    
+                <div className="form-group">
+                    <label>Winner: </label>
+                    <select ref="userInput"
+                      required
+                      className="form-control"
+                      value={this.state.winner}
+                      onChange={this.onChangeWinner}>
+                        {
+                            players.map(function(players){
+                                return<option
+                                key={players}
+                                value={players}>{players}
+                                </option>
+                            })
+                        }
+                      </select>
+                </div>
+          
+                  <div className="form-group">
+                    <input type="submit" value="Create a new replay" className="btn btn-primary" />
+                  </div>
+                </form>
               </div>
-              <div className="form-group"> 
-                <label>Youtube Link: </label>
-                <input  type="url"
-                    pattern="https://www.youtube.com/.+"
-                    required
-                    className="form-control"
-                    value={this.state.link}
-                    onChange={this.onChangeLink}
-                    />
+            )
+        }else{
+            return(
+                <div>
+                <h3>Create New Replay</h3>
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group"> 
+                    <label>Game: </label>
+                    <select ref="userInput"
+                        required
+                        className= "form-control"
+                        value={this.state.game}
+                        onChange={this.onChangeGame}>
+                        {
+                            this.state.games.map(function(game){
+                                return <option
+                                key = {game}
+                                value={game}>{game}
+                                </option>;
+                            })
+                        }
+                        </select>
+                  </div>
+                </form>
               </div>
-              <div className="form-group"> 
-                <label>Player 1: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.player1}
-                    onChange={this.onChangePlayer1}
-                    />
-              </div>
-              <div className="form-group"> 
-                <label>Player 2: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.player2}
-                    onChange={this.onChangePlayer2}
-                    />
-              </div>
-              <div className="form-group">
-                <label>Character 1: </label>
-                <select ref="userInput"
-                    required
-                    className= "form-control"
-                    value={this.state.character1}
-                    onChange={this.onChangeCharacter1}>
-                    {
-                        this.state.characters1.map(function(character1){
-                            return <option
-                            key = {character1}
-                            value={character1}>{character1}
-                            </option>;
-                        })
-                    }
-                    </select>
-              </div>
-              <div className="form-group">
-                <label>Character 2: </label>
-                <select ref="userInput"
-                    required
-                    className= "form-control"
-                    value={this.state.character2}
-                    onChange={this.onChangeCharacter2}>
-                    {
-                        this.state.characters2.map(function(character2){
-                            return <option
-                            key = {character2}
-                            value={character2}>{character2}
-                            </option>;
-                        })
-                    }
-                    </select>
-              </div>
-
-            <div className="form-group">
-                <label>Winner: </label>
-                <select ref="userInput"
-                  required
-                  className="form-control"
-                  value={this.state.winner}
-                  onChange={this.onChangeWinner}>
-                    {
-                        players.map(function(players){
-                            return<option
-                            key={players}
-                            value={players}>{players}
-                            </option>
-                        })
-                    }
-                  </select>
-            </div>
-      
-              <div className="form-group">
-                <input type="submit" value="Create a new replay" className="btn btn-primary" />
-              </div>
-            </form>
-          </div>
-        )
+            )
+        }
     }
 }

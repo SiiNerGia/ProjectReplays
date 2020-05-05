@@ -13,10 +13,10 @@ export default class Navbar extends Component {
           <Link to="/" className="nav-link">Replays</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/create" className="nav-link">Create New Replay</Link>
+          <Link to="/create" className="nav-link">Create new replay</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/search" className="nav-link">Search Replay</Link>
+          <Link to="/search" className="nav-link">Search replay</Link>
           </li>
         </ul>
         </div>

@@ -58,10 +58,9 @@
                 <thead className="thead-light">
                     <tr>
                     <th>Game</th>
-                    <th>Player1</th>
-                    
+                    <th>Player 1</th>
                     <th>Character 1</th>
-                    <th>Player2</th>
+                    <th>Player 2</th>
                     <th>Character 2</th>
                     <th>Winner</th>
                     <th>Link</th>
