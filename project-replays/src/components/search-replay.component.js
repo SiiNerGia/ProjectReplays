@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 //let Replay = require('ProjectReplays/backend/models/Replay.model');
 
 
@@ -11,6 +11,14 @@ const tekken7Characters = ['Heihachi','Kazuya','Lee','Law','Nina','Paul','Yoshim
 'Lili','Dragunov','Bob','Leo','Miguel','Lars','Alisa','Claudio','Katarina','Lucky Chloe','Shaheen','Josie','Gigas','Jack-7','Kazumi','Master Raven','Eliza','Anna','Lei','Julia',
 'Marduk','Armor King','Zafina','Ganryu','Leroy','Fahkumram','Akuma','Geese','Noctis','Negan']
 
+
+function encodeQueryData(data) {
+    const ret = [];
+    for (let d in data)
+      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+    return ret.join('&');
+ }
+
 export default class CreateReplays extends Component {
 
     
@@ -18,7 +26,6 @@ export default class CreateReplays extends Component {
         super(props);
 
         this.onChangeGame = this.onChangeGame.bind(this);
-        this.onChangeLink = this.onChangeLink.bind(this);
         this.onChangePlayer1 = this.onChangePlayer1.bind(this);
         this.onChangePlayer2 = this.onChangePlayer2.bind(this);
         this.onChangeCharacter1 = this.onChangeCharacter1.bind(this);
@@ -82,11 +89,7 @@ export default class CreateReplays extends Component {
         })
        
     }
-    onChangeLink(e){
-        this.setState({
-            link: e.target.value 
-        })
-    }
+   
     onChangePlayer1(e){
         this.setState({
             player1: e.target.value 
@@ -120,17 +123,16 @@ export default class CreateReplays extends Component {
 
 
     onSubmit(e){
-        // e.preventDefault();
+         e.preventDefault();
 
-        // const replay ={
-        //     game: this.state.game,
-        //     link: this.state.link,
-        //     player1: this.state.player1,
-        //     player2: this.state.player2,
-        //     character1: this.state.character1,
-        //     character2 :this.state.character2,
-        //     winner: this.state.winner
-        // }
+         const replay ={
+             game: this.state.game.toLowerCase(),
+             player1: this.state.player1.toLowerCase(),
+             player2: this.state.player2.toLowerCase(),
+            character1: this.state.character1.toLowerCase(),
+             character2 :this.state.character2.toLowerCase(),
+             winner: this.state.winner
+         }
 
         // console.log(JSON.stringify(replay));
 
@@ -142,8 +144,25 @@ export default class CreateReplays extends Component {
         // })
        
 
-    
+
+        //Aqui habria que introducir un link que construya la url con los parametros del formulario necesarios
+
+
+        for(var key in replay){
+            if (replay[key]=== ''){
+                delete replay[key]
+            }
+        }
+       const queryString = encodeQueryData(replay);
+
+       console.log(queryString);
+
+       const finalUrl = '/search?'+queryString;
+
+       console.log(finalUrl)
     }
+
+   
 
     render(){
         return(
@@ -168,19 +187,8 @@ export default class CreateReplays extends Component {
                     </select>
               </div>
               <div className="form-group"> 
-                <label>Youtube Link: </label>
-                <input  type="url"
-                    pattern="https://www.youtube.com/.+"
-                    required
-                    className="form-control"
-                    value={this.state.link}
-                    onChange={this.onChangeLink}
-                    />
-              </div>
-              <div className="form-group"> 
                 <label>Player 1: </label>
                 <input  type="text"
-                    required
                     className="form-control"
                     value={this.state.player1}
                     onChange={this.onChangePlayer1}
@@ -189,7 +197,6 @@ export default class CreateReplays extends Component {
               <div className="form-group"> 
                 <label>Player 2: </label>
                 <input  type="text"
-                    required
                     className="form-control"
                     value={this.state.player2}
                     onChange={this.onChangePlayer2}
@@ -198,7 +205,6 @@ export default class CreateReplays extends Component {
               <div className="form-group">
                 <label>Character 1: </label>
                 <select ref="userInput"
-                    required
                     className= "from-control"
                     value={this.state.character1}
                     onChange={this.onChangeCharacter1}>
@@ -215,7 +221,6 @@ export default class CreateReplays extends Component {
               <div className="form-group">
                 <label>Character 2: </label>
                 <select ref="userInput"
-                    required
                     className= "from-control"
                     value={this.state.character2}
                     onChange={this.onChangeCharacter2}>
