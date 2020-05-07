@@ -6,6 +6,7 @@ import Navbar from "./components/navbar.component";
 import ReplaysList from "./components/replays-list.component";
 import CreateReplay from "./components/create-replay.component";
 import SearchReplay from "./components/search-replay.component";
+import SearchReplayList from "./components/search-replay-list.component";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" exact component={ReplaysList} />
         <Route path="/create" exact component={CreateReplay} />
         <Route path="/search" exact component={SearchReplay} />
+        <Route path="/search" component={SearchReplayList} />
 
       
       </div>

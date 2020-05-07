@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 //let Replay = require('ProjectReplays/backend/models/Replay.model');
 
 
@@ -155,11 +155,15 @@ export default class CreateReplays extends Component {
         }
        const queryString = encodeQueryData(replay);
 
-       console.log(queryString);
+       
 
        const finalUrl = '/search?'+queryString;
 
        console.log(finalUrl)
+
+       window.location = finalUrl;
+
+       
     }
 
    
