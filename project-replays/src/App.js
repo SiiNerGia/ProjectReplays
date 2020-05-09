@@ -18,7 +18,6 @@ function App() {
         <Route path="/search" exact component={SearchReplay} />
       </div>
     </Router>
-    // Hay que introducir un route que tenga los parametros posibles introducidos por un formulario
   );
 }
 
