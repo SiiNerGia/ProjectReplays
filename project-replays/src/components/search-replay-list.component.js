@@ -17,20 +17,18 @@ import PropTypes from "prop-types";
     </tr>
   )
 
- export default class ReplaysList  extends Component {
+ export default class ReplaysList extends Component {
 
     static propTypes = {
-        
         location: PropTypes.object.isRequired,
-       
       }
 
       componentDidMount(){
         const { location } = this.props;
-        console.log('http://localhost:5000/search/'+location.pathname)
+        console.log('http://localhost:5000'+location.pathname)
 
 
-        axios.get('http://localhost:5000/search'+location.pathname).then(response => {
+        axios.get('http://localhost:5000'+location.pathname,{params:{game:'Sfv'}}).then(response => {
             this.setState({
                 replays: response.data
             })
@@ -56,7 +54,7 @@ import PropTypes from "prop-types";
     render(){
          return(
             <div>
-                <h3>Logged Replays</h3>
+                <h3>Results</h3>
                     <table className="table">
                 <thead className="thead-light">
                     <tr>

@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
-//let Replay = require('ProjectReplays/backend/models/Replay.model');
+import ReplaysList from './replays-list.component';
+import axios from 'axios';
 
 const streetFighterCharacters =['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
     'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'];
@@ -15,7 +16,7 @@ function encodeQueryData(data) {
     return ret.join('&');
  }
 
-export default class CreateReplays extends Component {
+export default class SearchReplays extends Component {
     
     constructor(props){
         super(props);
@@ -47,15 +48,15 @@ export default class CreateReplays extends Component {
         this.setState({
             games: ['Street Fighter V','Tekken 7'],
            
-         characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+            characters1: ['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
         'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
            
-        characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
+            characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
             'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
         
-        game:'Sfv',
-        character1: 'Ryu',
-        character2:'Ken'
+            game:'Sfv',
+            character1: 'Ryu',
+            character2:'Ken'
         })
     }
 
@@ -127,6 +128,15 @@ export default class CreateReplays extends Component {
         // })
        
         //Aqui habria que introducir un link que construya la url con los parametros del formulario necesarios
+
+        axios.get("http://localhost:5000/search/",
+            {params:{game:'Sfv'}}).then(response => {
+                this.setState({
+                    replays: response.data
+                })
+            }).catch((error) => {
+                console.log(error);
+        })
 
         for(var key in replay){
             if (replay[key]=== ''){
@@ -218,7 +228,7 @@ export default class CreateReplays extends Component {
                 <input type="submit" value="Search replay" className="btn btn-primary" />
               </div>
             </form>
-          </div>
+          </div>  
         )
     }
 }

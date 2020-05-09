@@ -21,9 +21,11 @@ connection.once('open', () => {
 
 const replaysRouter = require('./routes/replays');
 const userRouter = require('./routes/users');
+const searchRouter = require('./routes/search');
 
 app.use('/replays', replaysRouter);
 app.use('/users', userRouter);
+app.use('/search', searchRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

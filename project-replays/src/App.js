@@ -13,17 +13,12 @@ function App() {
     <Router>
       <Navbar />
       <div className="container">
-
-        
         <br/>
         <Route path="/" exact component={ReplaysList} />
         <Route path="/create" exact component={CreateReplay} />
         <Route path="/search" exact component={SearchReplay} />
         <Route path="/search" component={SearchReplayList} />
-
-      
       </div>
-
     </Router>
     // Hay que introducir un route que tenga los parametros posibles introducidos por un formulario
   );
