@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import ReplaysList from './replays-list.component';
 import axios from 'axios';
 
 const streetFighterCharacters =['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
@@ -15,6 +14,20 @@ function encodeQueryData(data) {
       ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
     return ret.join('&');
  }
+
+ const Replay = props => (
+    <tr>
+        <td>{props.exercise.game}</td>
+        <td>{props.exercise.player1}</td>
+        <td>{props.exercise.character1}</td>
+        <td>{props.exercise.player2}</td>
+        <td>{props.exercise.character2}</td>
+        <td>{props.exercise.winner}</td>
+        <td>
+            <a href={props.exercise.link} target="_blank" rel="noopener noreferrer">Link</a>
+        </td>
+    </tr>
+  )
 
 export default class SearchReplays extends Component {
     
@@ -40,7 +53,8 @@ export default class SearchReplays extends Component {
             character1:'',
             character2:'',
             winner: '',
-            replaysQuery: ''
+            replaysQuery: '',
+            replays: []
         }
     }
 
@@ -53,10 +67,10 @@ export default class SearchReplays extends Component {
            
             characters2: ['Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
             'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
-        
-            game:'Sfv',
-            character1: 'Ryu',
-            character2:'Ken'
+
+            game: "Street Fighter V",
+            character1: "Ryu",
+            character2: "Ken"
         })
     }
 
@@ -110,48 +124,31 @@ export default class SearchReplays extends Component {
     }
 
     onSubmit(e){
-         e.preventDefault();
+        e.preventDefault();
 
-         const replay ={
-             game: this.state.game.toLowerCase(),
-             player1: this.state.player1.toLowerCase(),
-             player2: this.state.player2.toLowerCase(),
-            character1: this.state.character1.toLowerCase(),
-             character2 :this.state.character2.toLowerCase(),
-             winner: this.state.winner
-         }
+        const replay = {};
 
-        // console.log(JSON.stringify(replay));
-
-        // this.setState({
-        //     replaysQuery: Replay.find({game: 'Tekken'})
-        // })
-       
-        //Aqui habria que introducir un link que construya la url con los parametros del formulario necesarios
+        this.state.game && (replay.game = this.state.game);
+        this.state.player1 && (replay.player1 = this.state.player1);
+        this.state.player2 && (replay.player2 = this.state.player2);
+        this.state.character1 && (replay.character1 = this.state.character1);
+        this.state.character2 && (replay.character2 = this.state.character2);
 
         axios.get("http://localhost:5000/search/",
-            {params:{game:'Sfv'}}).then(response => {
+            {params:replay}).then(response => {
                 this.setState({
                     replays: response.data
                 })
             }).catch((error) => {
                 console.log(error);
         })
-
-        for(var key in replay){
-            if (replay[key]=== ''){
-                delete replay[key]
-            }
-        }
-       const queryString = encodeQueryData(replay);
-
-       const finalUrl = '/search?'+queryString;
-
-       console.log(finalUrl)
-
-       window.location = finalUrl;
-       
     }
+
+    replayList() {
+        return this.state.replays.map(currentreplay => {
+          return <Replay exercise={currentreplay} deleteReplay={this.deleteReplay} key={currentreplay._id}/>;
+        })
+      }
 
     render(){
         return(
@@ -228,7 +225,26 @@ export default class SearchReplays extends Component {
                 <input type="submit" value="Search replay" className="btn btn-primary" />
               </div>
             </form>
-          </div>  
+            <div>
+          <h3>Results</h3>
+              <table className="table">
+          <thead className="thead-light">
+              <tr>
+              <th>Game</th>
+              <th>Player 1</th>
+              <th>Character 1</th>
+              <th>Player 2</th>
+              <th>Character 2</th>
+              <th>Winner</th>
+              <th>Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              { this.replayList() }
+          </tbody>
+          </table> 
+        </div>
+          </div>
         )
     }
 }
