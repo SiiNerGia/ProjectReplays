@@ -1,8 +1,5 @@
 import React, { Component} from 'react';
-import axios from 'axios';
 //let Replay = require('ProjectReplays/backend/models/Replay.model');
-
-
 
 const streetFighterCharacters =['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
     'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'];
@@ -10,7 +7,6 @@ const streetFighterCharacters =['Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim'
 const tekken7Characters = ['Heihachi','Kazuya','Lee','Law','Nina','Paul','Yoshimitsu','Bryan','Eddy','Hwoarang','Jin','King','Kuma','Xiaoyu','Panda','Steve','Asuka','Devil Jin','Feng',
 'Lili','Dragunov','Bob','Leo','Miguel','Lars','Alisa','Claudio','Katarina','Lucky Chloe','Shaheen','Josie','Gigas','Jack-7','Kazumi','Master Raven','Eliza','Anna','Lei','Julia',
 'Marduk','Armor King','Zafina','Ganryu','Leroy','Fahkumram','Akuma','Geese','Noctis','Negan']
-
 
 function encodeQueryData(data) {
     const ret = [];
@@ -20,7 +16,6 @@ function encodeQueryData(data) {
  }
 
 export default class CreateReplays extends Component {
-
     
     constructor(props){
         super(props);
@@ -32,10 +27,6 @@ export default class CreateReplays extends Component {
         this.onChangeCharacter2 = this.onChangeCharacter2.bind(this);
         this.onChangeWinner = this.onChangeWinner.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
-
-
-
 
         this.state = {
             games: [],
@@ -52,8 +43,6 @@ export default class CreateReplays extends Component {
         }
     }
 
-
-
     componentDidMount(){
         this.setState({
             games: ['Street Fighter V','Tekken 7'],
@@ -69,7 +58,6 @@ export default class CreateReplays extends Component {
         character2:'Ken'
         })
     }
-
 
     onChangeGame(e){
         if(e.target.value === 'Street Fighter V'){
@@ -114,13 +102,11 @@ export default class CreateReplays extends Component {
         })
     }
 
-
     onChangeWinner(e){
         this.setState({
             winner: e.target.value
         })
     }
-
 
     onSubmit(e){
          e.preventDefault();
@@ -136,17 +122,11 @@ export default class CreateReplays extends Component {
 
         // console.log(JSON.stringify(replay));
 
-
-
-
         // this.setState({
         //     replaysQuery: Replay.find({game: 'Tekken'})
         // })
        
-
-
         //Aqui habria que introducir un link que construya la url con los parametros del formulario necesarios
-
 
         for(var key in replay){
             if (replay[key]=== ''){
@@ -155,18 +135,13 @@ export default class CreateReplays extends Component {
         }
        const queryString = encodeQueryData(replay);
 
-       
-
        const finalUrl = '/search?'+queryString;
 
        console.log(finalUrl)
 
        window.location = finalUrl;
-
        
     }
-
-   
 
     render(){
         return(
@@ -177,7 +152,7 @@ export default class CreateReplays extends Component {
                 <label>Game: </label>
                 <select ref="userInput"
                     required
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.game}
                     onChange={this.onChangeGame}>
                     {
@@ -209,7 +184,7 @@ export default class CreateReplays extends Component {
               <div className="form-group">
                 <label>Character 1: </label>
                 <select ref="userInput"
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.character1}
                     onChange={this.onChangeCharacter1}>
                     {
@@ -225,7 +200,7 @@ export default class CreateReplays extends Component {
               <div className="form-group">
                 <label>Character 2: </label>
                 <select ref="userInput"
-                    className= "from-control"
+                    className= "form-control"
                     value={this.state.character2}
                     onChange={this.onChangeCharacter2}>
                     {
@@ -239,7 +214,6 @@ export default class CreateReplays extends Component {
                     </select>
               </div>
               
-      
               <div className="form-group">
                 <input type="submit" value="Search replay" className="btn btn-primary" />
               </div>

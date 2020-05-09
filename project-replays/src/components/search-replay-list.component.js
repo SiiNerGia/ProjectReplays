@@ -5,22 +5,19 @@ import PropTypes from "prop-types";
 
  const Replay = props => (
     <tr>
-      <td>{props.exercise.game}</td>
-      <td>{props.exercise.player1}</td>
-      <td>{props.exercise.character1}</td>
-      <td>{props.exercise.player2}</td>
-      <td>{props.exercise.character2}</td>
-      <td>{props.exercise.winner}</td>
-      <td>
-         <a href={props.exercise.link} target="_blank" rel="noopener noreferrer">Link</a>
+        <td>{props.exercise.game}</td>
+        <td>{props.exercise.player1}</td>
+        <td>{props.exercise.character1}</td>
+        <td>{props.exercise.player2}</td>
+        <td>{props.exercise.character2}</td>
+        <td>{props.exercise.winner}</td>
+        <td>
+            <a href={props.exercise.link} target="_blank" rel="noopener noreferrer">Link</a>
         </td>
-      
-      
     </tr>
   )
 
  export default class ReplaysList  extends Component {
-
 
     static propTypes = {
         
@@ -45,19 +42,10 @@ import PropTypes from "prop-types";
      constructor(props){
          super(props);
 
-        
-
-
          this.state = {
              replays: []
             };
      }
-
-    
-     componentDidMount(){
-
-     }
-
 
      replayList() {
         return this.state.replays.map(currentreplay => {
@@ -65,9 +53,7 @@ import PropTypes from "prop-types";
         })
       }
 
-
-
-     render(){
+    render(){
          return(
             <div>
                 <h3>Logged Replays</h3>
