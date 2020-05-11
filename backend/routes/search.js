@@ -11,7 +11,7 @@ router.route('/').get((req,res) => {
     }
 
     if (req.query.player1 || req.query.player2 || req.query.character1 || req.query.character2) {
-        let OrCondition = [];
+        let orCondition = [];
         let stAndOrCondition =[];
         let ndAndOrCondition = [];
         if (req.query.player1) {
@@ -32,9 +32,9 @@ router.route('/').get((req,res) => {
             stAndOrCondition.push({character2: req.query.character2})
             ndAndOrCondition.push({character1: req.query.character2})
         }
-        OrCondition.push({$and: stAndOrCondition})
-        OrCondition.push({$and: ndAndOrCondition})
-        andConds.push({$or: OrCondition})
+        orCondition.push({$and: stAndOrCondition})
+        orCondition.push({$and: ndAndOrCondition})
+        andConds.push({$or: orCondition})
         console.log(JSON.stringify(andConds))
     }
 
