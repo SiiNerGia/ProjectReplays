@@ -134,6 +134,8 @@ export default class SearchReplays extends Component {
         this.state.character1 && (replay.character1 = this.state.character1);
         this.state.character2 && (replay.character2 = this.state.character2);
 
+        console.log(replay);
+        
         axios.get("http://localhost:5000/search/",
             {params:replay}).then(response => {
                 this.setState({
