@@ -41,7 +41,7 @@ router.route('/').get((req,res) => {
    
 
     //if no conditions exists match all as before.
-    Replay.find(andConds.length ? {$and: andConds} : {}).then(replays => res.json(replays)).catch(err => res.status(400).json('Error: ' + err));
+    Replay.find(andConds.length ? {$and: andConds} : {}).collation({locale: 'en',strength:2}).then(replays => res.json(replays)).catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports= router;
