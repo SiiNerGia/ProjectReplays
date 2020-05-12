@@ -8,12 +8,7 @@ const tekken7Characters = ['','Heihachi','Kazuya','Lee','Law','Nina','Paul','Yos
 'Lili','Dragunov','Bob','Leo','Miguel','Lars','Alisa','Claudio','Katarina','Lucky Chloe','Shaheen','Josie','Gigas','Jack-7','Kazumi','Master Raven','Eliza','Anna','Lei','Julia',
 'Marduk','Armor King','Zafina','Ganryu','Leroy','Fahkumram','Akuma','Geese','Noctis','Negan']
 
-function encodeQueryData(data) {
-    const ret = [];
-    for (let d in data)
-      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
-    return ret.join('&');
- }
+
 
  const Replay = props => (
     <tr>

@@ -41,17 +41,7 @@ export default class CreateReplays extends Component {
         }
     }
 
-    // componentDidMount(){
-    //     axios.get('http://localhost:5000/users/').then(response => {
-    //         if(response.data.length > 0){
-    //             this.setState({
-    //                 users: response.data.map(user => user.username),
-    //                 username: response.data[0].username
-    //             })
-    //         }
-    //     })
-       
-    // }
+ 
 
     componentDidMount(){
         this.setState({
