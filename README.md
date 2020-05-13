@@ -18,8 +18,3 @@ This content is shared under the CreativeCommons Attribution-ShareAlike 4.0 lice
 
 ## Authors
 © 2020 Víctor Rosado and Javier Toro.
-
-Developing steps:
-Remember to launch Nodemon -> on backend folder: nodemon server
-
-to launch react application -> on project folder: npm start
