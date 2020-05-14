@@ -58,7 +58,7 @@ export default class SearchReplays extends Component {
             games: ['Street Fighter V','Tekken 7'],
            
             characters1: ['','Ryu','Ken','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
-        'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
+            'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
            
             characters2: ['','Ken','Ryu','Birdie','Cammy','Chun-Li','Dhalsim','F.A.N.G','Karin','Laura','M.Bison/Dictator','Nash','Necalli','R.Mika','Rashid','Vega/Claw','Zangief','Alex','Balrog/Boxer','Guile',
             'Ibuki','Juri','Urien','Abigail','Akuma/Gouki','Ed','Kolin','Menat','Zeku','Blanka','Cody','Falke','G','Sagat','Sakura','E.Honda','Gill','Kage','Lucia','Poison','Seth'],
@@ -74,12 +74,17 @@ export default class SearchReplays extends Component {
             this.setState({
                 characters1: streetFighterCharacters,
                 characters2: streetFighterCharacters,
+                character1: '',
+                character2: ''
             })
             
-        }else{
+        }
+        if(e.target.value === 'Tekken 7'){
             this.setState({
                 characters1: tekken7Characters,
                 characters2: tekken7Characters,
+                character1: '',
+                character2: ''
             })
         }
         this.setState({
