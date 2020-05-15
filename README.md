@@ -10,10 +10,12 @@ Install [Node.js](https://nodejs.org/es/) on your computer.
 After Node is intalled, run in console ```npm i react-scripts``` and ```npm i nodemon```.
 
 ### Back-end
-On /backend folder: ```nodemon server.js```
+On /backend folder: ```nodemon server.js```.
+It will be deployed to localhost:5000 on your computer.
 
 ### Front-end
-On /project-replays folder: ```npm start```
+On /project-replays folder: ```npm start```.
+It will be deployed to localhost:3000 on your computer.
 
 ## What do you need?
 React, React-Scripts and Nodemon.
