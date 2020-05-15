@@ -1,5 +1,5 @@
 # Project Replays
-A MERN stack web application for managing fight games replays hosted in YouTube.
+A MERN stack web application for managing fighting games replays hosted in YouTube.
 
 ## How to run the application
 
