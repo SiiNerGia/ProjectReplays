@@ -3,6 +3,12 @@ A MERN stack web application for managing fight games replays hosted in YouTube.
 
 ## How to run the application
 
+### Prerequisites
+
+Install Node.js
+
+After node is intalled, run in console ```npm i react-scripts```
+
 ### Back-end
 On /backend folder: nodemon server.js
 
