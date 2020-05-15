@@ -5,15 +5,15 @@ A MERN stack web application for managing fighting games replays hosted in YouTu
 
 ### Prerequisites
 
-Install Node.js
+Install [Node.js](https://nodejs.org/es/) on your computer.
 
-After node is intalled, run in console ```npm i react-scripts```
+After Node is intalled, run in console ```npm i react-scripts``` and ```npm i nodemon```.
 
 ### Back-end
-On /backend folder: nodemon server.js
+On /backend folder: ```nodemon server.js```
 
 ### Front-end
-On /project-replays folder: npm start
+On /project-replays folder: ```npm start```
 
 ## What do you need?
 React, React-Scripts and Nodemon.
