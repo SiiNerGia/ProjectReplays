@@ -64,10 +64,13 @@ export default class CreateReplays extends Component {
                 characters2: streetFighterCharacters,
             })
             
-        }else{
+        }
+        if(e.target.value === 'Tekken 7'){
             this.setState({
                 characters1: tekken7Characters,
                 characters2: tekken7Characters,
+                character1: 'Heihachi',
+                character2: 'Heihachi'
             })
         }
         this.setState({
