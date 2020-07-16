@@ -35,8 +35,9 @@ router.route('/').get((req,res) => {
         orCondition.push({$and: stAndOrCondition})
         orCondition.push({$and: ndAndOrCondition})
         andConds.push({$or: orCondition})
-        console.log(JSON.stringify(andConds))
+        
     }
+    console.log(JSON.stringify(andConds))
 
    
 

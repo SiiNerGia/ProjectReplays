@@ -24,6 +24,9 @@ const searchRouter = require('./routes/search');
 
 app.use('/replays', replaysRouter);
 app.use('/search', searchRouter);
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('project-replays/build'))
+}
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
