@@ -29,7 +29,7 @@ if(process.env.NODE_ENV === 'production'){
     app.use(express.static('project-replays/build'))
 
     app.get('*', (req,res) => {
-     res.sendFile(path.join(__dirname, 'project-replays','build','index.html'));    
+     res.sendFile(path.join(__dirname, '../project-replays','build','index.html'));    
     })
 }
 
