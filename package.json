@@ -12,10 +12,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-scripts start",
     "heroku-postbuild": "cd project-replays && npm install && npm run build"
   },
   "eslintConfig": {
